@@ -1,0 +1,67 @@
+﻿<Window x:Class="RiDe.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RiDe"
+        xmlns:hw="http://schemas.hpod9.com/haley/wpf"
+        xmlns:hm="http://schemas.hpod9.com/haley/mvvm"
+        mc:Ignorable="d"
+        Closing="Window_Closing"
+        Title="Passing Thought" Height="300" Width="300" WindowStyle="None" Background="#BC343340" AllowsTransparency="True" hm:WindowBlurAP.IsEnabled="True" ResizeMode="CanResizeWithGrip" 
+        xmlns:System="clr-namespace:System;assembly=System.Runtime"
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="RenamePromptTextBox" TextWrapping="Wrap" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Foreground="White" BorderBrush="#7F101010" Background="#7F000000" Grid.Row="1" Grid.ColumnSpan="3" Margin="10,10,10,10" SelectionBrush="#FFFE8AFF" SelectionTextBrush="#FFF5DD39" CaretBrush="White" AcceptsReturn="True" AcceptsTab="True" Padding="10,10,10,10">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="Pin" Header="Pin" IsCheckable="True" Click="MenuItem_Click" InputGestureText="Ctrl+P"></MenuItem>
+                    <MenuItem x:Name="SaveLive" Header="Save" Click="SaveLive_Click" InputGestureText="Ctrl+S"></MenuItem>
+                    <MenuItem x:Name="Save" Header="Save as..." Click="Save_Click" InputGestureText="Ctrl+Shift+S"></MenuItem>
+                    <MenuItem x:Name="Open" Header="Open Note" Click="Open_Click" InputGestureText="Ctrl+O"></MenuItem>
+                    <MenuItem Command="Copy"></MenuItem>
+                    <MenuItem Command="Paste"></MenuItem>
+                    <MenuItem x:Name="Color" Header="Change Color" Click="Color_Click"></MenuItem>
+                    <MenuItem Header="Exit" Click="MenuItem_Click_1" InputGestureText="Ctrl+Q"></MenuItem>
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
+        <Canvas Grid.ColumnSpan="3" Background="#33000000" MouseDown="Grid_MouseLeftButtonDown"/>
+    </Grid>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open"
+                        Executed="Executed_Open"
+                        CanExecute="CanExecute"/>
+        <CommandBinding Command="ApplicationCommands.SaveAs"
+                        Executed="Executed_SaveAs"
+                        CanExecute="CanExecute"/>
+        <CommandBinding Command="ApplicationCommands.Save"
+                        Executed="Executed_Save"
+                        CanExecute="CanExecute"/>
+        <CommandBinding Command="ApplicationCommands.Close"
+                        Executed="Executed_Exit"
+                        CanExecute="CanExecute"/>
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="ApplicationCommands.Open"
+                    Gesture="Ctrl+O"/>
+        <KeyBinding Command="ApplicationCommands.SaveAs"
+                    Gesture="Ctrl+Shift+S"/>
+        <KeyBinding Command="ApplicationCommands.Save"
+                    Gesture="Ctrl+S"/>
+        <KeyBinding Command="ApplicationCommands.Close"
+                    Gesture="Ctrl+Q"/>
+    </Window.InputBindings>
+</Window>
